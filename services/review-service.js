@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const reviewService = require("../DAO/review-service")
+    const reviewService = require("../database/review/review-dao")
 
     const findAllReviews = (req, res) => {
         reviewService.findAllReviews()
@@ -8,27 +8,27 @@ module.exports = (app) => {
             })
     }
 
-    const findReviewsByRecipe = (req, res) => {
-        const recipeId = req.params['recipeId']
-        reviewService.findReviewsByRecipe(recipeId)
+    const findReviewsBycocktail = (req, res) => {
+        const cocktailId = req.params['cocktailId']
+        reviewService.findReviewsBycocktail(cocktailId)
             .then((reviews) => {
                 res.send(reviews)
             })
     }
 
-    const createReviewForRecipe = (req, res) => {
-        // reviewService.createReviewForRecipe(req.params.recipeId, req.body)
+    const createReviewForcocktail = (req, res) => {
+        // reviewService.createReviewForcocktail(req.params.cocktailId, req.body)
         //     .then((reviews) => {
         //         res.send(reviews)
         //     })
         const review = req.body;
-        const recipeId = review.recipeId;
+        const cocktailId = review.cocktailId;
         const textArea = review.textArea;
         const username = review.username;
-        const recipeName = review.recipeName;
-        const recipeImg = review.recipeImg;
+        const cocktailName = review.cocktailName;
+        const cocktailImg = review.cocktailImg;
         const userId = review.userId;
-        reviewService.createReviewForRecipe(recipeId, textArea, username, recipeName, recipeImg, userId)
+        reviewService.createReviewForcocktail(cocktailId, textArea, username, cocktailName, cocktailImg, userId)
             .then(review => res.json(review));
     }
 
@@ -41,9 +41,9 @@ module.exports = (app) => {
     }
 
     const deleteReview = (req, res) => {
-        const recipeId = req.params["recipeId"];
+        const cocktailId = req.params["cocktailId"];
         const reviewId = req.params["reviewId"];
-        reviewService.deleteReview(recipeId, reviewId)
+        reviewService.deleteReview(cocktailId, reviewId)
             .then(review => res.json(review));
     }
 
@@ -54,10 +54,10 @@ module.exports = (app) => {
     }
 
     app.get("/api/reviews", findAllReviews)
-    app.get("/api/reviews/:recipeId", findReviewsByRecipe)
-    app.post("/api/reviews/:recipeId", createReviewForRecipe)
+    app.get("/api/reviews/:cocktailId", findReviewsBycocktail)
+    app.post("/api/reviews/:cocktailId", createReviewForcocktail)
     app.get('/api/internal/reviews/:reviewId', findReviewById)
     app.get("/api/reviews/username/:username", findReviewsByUsername)
-    app.delete("/api/reviews/:recipeId/:reviewId", deleteReview)
+    app.delete("/api/reviews/:cocktailId/:reviewId", deleteReview)
 }
 

@@ -47,9 +47,9 @@ app.get('/hello', (req, res) => {
     res.send('Hello World!');
 });
 
-require("./controllers/user-controller")(app)
-require("./controllers/review-controller")(app)
-require("./controllers/favorite-controller")(app)
+require("./services/user-service")(app)
+require("./services/review-service")(app)
+require("./services/favorite-service")(app)
 
 app.listen(process.env.PORT || 3001)
 console.log("node server is running!")

@@ -2,7 +2,7 @@ const mongoose = require("mongoose")
 const Schema = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
-    recipeId: String,
+    cocktailId: String,
     textArea: String,
     // userId: {
     //     type: Schema.Types.ObjectId,
@@ -13,8 +13,8 @@ const reviewSchema = new mongoose.Schema({
         ref: "UserModel"
     },
     userId: String,
-    recipeName: String,
-    recipeImg: String
+    cocktailName: String,
+    cocktailImg: String
 }, {collection: "reviews", timestamps: true})
 
 module.exports = reviewSchema

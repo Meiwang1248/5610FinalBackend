@@ -1,5 +1,5 @@
 module.exports = (app) => {
-    const userService = require("../DAO/user-service");
+    const userService = require("../database/user/user-dao");
 
     const register = (req, res) => {
         const credentials = req.body;

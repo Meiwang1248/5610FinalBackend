@@ -1,4 +1,4 @@
-const userModel = require("../database/user/user-model")
+const userModel = require("./user-model")
 
 const register = (user) => {
     return userModel.create(user);

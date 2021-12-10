@@ -1,10 +1,10 @@
 module.exports = (app) => {
-    const favoriteService = require('../DAO/favorite-service');
+    const favoriteService = require('../database/favorite/favorite-dao');
 
     const isFavorite = (req, res) => {
         const userId = req.params.userId;
-        const recipeId = req.params.recipeId;
-        favoriteService.isFavorite(userId, recipeId).then(count => {
+        const cocktailId = req.params.cocktailId;
+        favoriteService.isFavorite(userId, cocktailId).then(count => {
             if (count <= 0) {
                 res.send(false);
             } else {
@@ -21,22 +21,22 @@ module.exports = (app) => {
 
     const addFavorite = (req, res) => {
         const userId = req.body.userId;
-        const recipeId = req.body.recipeId;
+        const cocktailId = req.body.cocktailId;
         const username = req.body.username;
-        const recipeName = req.body.recipeName;
-        const recipeImg = req.body.recipeImg;
-        favoriteService.addFavorite(userId, recipeId, username, recipeName, recipeImg)
+        const cocktailName = req.body.cocktailName;
+        const cocktailImg = req.body.cocktailImg;
+        favoriteService.addFavorite(userId, cocktailId, username, cocktailName, cocktailImg)
             .then(favorite => res.json(favorite));
     }
 
     const removeFavorite = (req, res) => {
         const userId = req.body.userId;
-        const recipeId = req.body.recipeId;
-        favoriteService.removeFavorite(userId, recipeId)
+        const cocktailId = req.body.cocktailId;
+        favoriteService.removeFavorite(userId, cocktailId)
             .then(favorite => res.json(favorite));
     }
 
-    app.get('/api/favorite/:recipeId/:userId', isFavorite);
+    app.get('/api/favorite/:cocktailId/:userId', isFavorite);
     app.get('/api/favorite/:userId', findFavoritesByUserId);
     app.post('/api/favorite', addFavorite);
     app.delete('/api/favorite', removeFavorite);
