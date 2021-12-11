@@ -50,6 +50,7 @@ app.get('/hello', (req, res) => {
 require("./services/user-service")(app)
 require("./services/review-service")(app)
 require("./services/favorite-service")(app)
+require("./services/profile-service")(app)
 
 app.listen(process.env.PORT || 3001)
 console.log("node server is running!")
