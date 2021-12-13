@@ -38,7 +38,7 @@ module.exports = (app) => {
     }
 
     const findAllFavorites = (req, res) => {
-        favoriteService.findAllFavorite()
+        favoriteService.findAllFavorites()
             .then((favorites) => {
                 res.send(favorites);
             });
